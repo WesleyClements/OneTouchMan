@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://eye/eye.gd" type="Script" id=1]
+[ext_resource path="res://eye/eye.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 8.10036
+
+[sub_resource type="Animation" id=2]
+resource_name = "Flying"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("pupil:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 2, 0 ), Vector2( 2, 1 ), Vector2( 2, 0 ), Vector2( 2, -1 ) ]
+}
+
+[node name="eye" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="eyeCollision" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="collisionRight" type="RayCast2D" parent="."]
+position = Vector2( 0, -8 )
+enabled = true
+cast_to = Vector2( 48, 0 )
+
+[node name="collisionLeft" type="RayCast2D" parent="."]
+position = Vector2( 0, -8 )
+enabled = true
+cast_to = Vector2( -48, 0 )
+
+[node name="sprite" type="Node2D" parent="."]
+
+[node name="cornea" type="Sprite" parent="sprite"]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="pupil" type="Sprite" parent="sprite"]
+position = Vector2( 2, 0 )
+z_index = 1
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 16, 4, 8, 8 )
+
+[node name="pupilAnimation" type="AnimationPlayer" parent="sprite"]
+autoplay = "Flying"
+anims/Flying = SubResource( 2 )

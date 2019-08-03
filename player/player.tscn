@@ -1,0 +1,228 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://player/playerController.gd" type="Script" id=1]
+[ext_resource path="res://player/playerCollider.tres" type="Shape2D" id=2]
+[ext_resource path="res://player/player.png" type="Texture" id=3]
+[ext_resource path="res://player/idleAnimation.tres" type="Animation" id=4]
+
+[sub_resource type="Animation" id=2]
+resource_name = "Jump"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprites/body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("sprites/arm1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -7, -2 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("sprites/arm2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 7, -2 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("sprites/leg1:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 4, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("sprites/leg2:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -4, 1 ) ]
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("sprites/leg1:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0, -0.34, 0.157711, 0.34, -0.157711, -30, -0.7, 0.0362473, 0.7, -0.0362473 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("sprites/leg2:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 0, -0.33, -0.00382233, 0.33, 0.00382233, 30, -0.74, -0.0438385, 0.74, 0.0438385 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "Walking"
+length = 1.2
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("sprites/body:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.229507, -0.000879794, 0.229507, 0.000879794, 1, -0.122456, 0, 0.122456, 0, -0.5, -0.162326, -0.0150949, 0.162326, 0.0150949, 1, -0.133848, 0.015095, 0.133848, -0.015095, 0, -0.170869, 0.0150949, 0.170869, -0.0150949 ),
+"times": PoolRealArray( 0, 0.3, 0.6, 0.899912, 1.2 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("sprites/arm1:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -2, -0.165174, -0.00834727, 0.165174, 0.00834727, -1, -0.146218, -0.00200069, 0.146218, 0.00200069, -2.5, -0.144348, 0.0111637, 0.144348, -0.0111637, -1, -0.12824, -0.00200069, 0.12824, 0.00200069, -2, -0.163393, -0.00674772, 0.163393, 0.00674772 ),
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("sprites/arm2:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( -2, -0.139543, 0.00674725, 0.139543, -0.00674725, -1, -0.14337, 0.00461358, 0.14337, -0.00461358, -2.5, -0.150044, -0.00488067, 0.150044, 0.00488067, -1, -0.148175, 0.00461322, 0.148175, -0.00461322, -2, -0.163393, -0.00674772, 0.163393, 0.00674772 ),
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("sprites/leg2:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, -4, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, -4, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("sprites/leg1:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( -4, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, -4, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, -4, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 )
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("sprites/leg1:rotation_degrees")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("sprites/leg2:rotation_degrees")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[node name="player" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -1 )
+shape = ExtResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.5, 0.5 )
+
+[node name="sprites" type="Node2D" parent="."]
+
+[node name="body" type="Sprite" parent="sprites"]
+texture = ExtResource( 3 )
+offset = Vector2( 0, -7 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="arm1" type="Sprite" parent="sprites"]
+position = Vector2( -7, -2 )
+z_index = -3
+texture = ExtResource( 3 )
+offset = Vector2( 0, 6 )
+region_enabled = true
+region_rect = Rect2( 16, 0, 4, 16 )
+
+[node name="arm2" type="Sprite" parent="sprites"]
+position = Vector2( 7, -2 )
+z_index = 1
+texture = ExtResource( 3 )
+offset = Vector2( 0, 6 )
+region_enabled = true
+region_rect = Rect2( 16, 0, 4, 16 )
+
+[node name="leg1" type="Sprite" parent="sprites"]
+position = Vector2( 4, 1 )
+rotation = -0.523599
+z_index = -1
+texture = ExtResource( 3 )
+offset = Vector2( 0, 6 )
+region_enabled = true
+region_rect = Rect2( 16, 0, 4, 16 )
+
+[node name="leg2" type="Sprite" parent="sprites"]
+position = Vector2( -4, 1 )
+rotation = 0.523599
+z_index = -2
+texture = ExtResource( 3 )
+offset = Vector2( 0, 6 )
+region_enabled = true
+region_rect = Rect2( 16, 0, 4, 16 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
+anims/Idle = ExtResource( 4 )
+anims/Jump = SubResource( 2 )
+anims/Walking = SubResource( 1 )

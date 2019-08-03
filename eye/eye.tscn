@@ -29,23 +29,25 @@ script = ExtResource( 1 )
 [node name="eyeCollision" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="cornea" type="Sprite" parent="."]
+[node name="collisionRight" type="RayCast2D" parent="."]
+position = Vector2( 0, -8 )
+enabled = true
+cast_to = Vector2( 48, 0 )
+
+[node name="sprite" type="Node2D" parent="."]
+
+[node name="cornea" type="Sprite" parent="sprite"]
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
 
-[node name="pupil" type="Sprite" parent="."]
+[node name="pupil" type="Sprite" parent="sprite"]
 position = Vector2( 2, 0 )
 z_index = 1
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 16, 4, 8, 8 )
 
-[node name="pupilAnimation" type="AnimationPlayer" parent="."]
+[node name="pupilAnimation" type="AnimationPlayer" parent="sprite"]
 autoplay = "Flying"
 anims/Flying = SubResource( 2 )
-
-[node name="collisionRight" type="RayCast2D" parent="."]
-position = Vector2( 12, -8 )
-enabled = true
-cast_to = Vector2( 0, 16 )

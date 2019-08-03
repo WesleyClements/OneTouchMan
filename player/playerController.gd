@@ -36,9 +36,9 @@ var facing: int setget setFacing;
 func setFacing(newFacing) -> void:
 	facing = newFacing;
 	if facing == -1:
-		$sprites.set_flip_h(false);
+		$sprites.scale.x = 1;
 	else:
-		$sprites.set_flip_h(true);
+		$sprites.scale.x = -1;
 
 var timeOffGround;
 
@@ -119,7 +119,7 @@ func processMove(delta, moveDir) -> Vector2:
 				return Vector2();
 				
 			applyForce = true;
-			facing = moveDir;
+			setFacing(moveDir);
 			moveState = (MoveState.MOVE_LEFT if moveDir == -1 else MoveState.MOVE_RIGHT);
 			moveStateTime = 0;
 		MoveState.MOVE_LEFT, MoveState.MOVE_RIGHT:
@@ -129,7 +129,7 @@ func processMove(delta, moveDir) -> Vector2:
 					applyForce = true;
 				else:
 					velocity.x = 0;
-					facing = moveDir;
+					setFacing(moveDir);
 					moveState = newMoveState;
 					moveStateTime = 0;
 			else:

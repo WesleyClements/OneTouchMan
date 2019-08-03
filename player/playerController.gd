@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
-const gravity:= 700;
+const gravity:= 700.0;
+
+const frictionCoef:= 8;
 
 export(float) var inputTimeEpsilon:= 0.1;
 
@@ -139,5 +141,7 @@ func processMove(delta, moveDir) -> Vector2:
 	if applyForce:
 		var forceScalar = (moveForce if is_on_floor() else moveForceAir);
 		return moveDir * forceScalar * Vector2.RIGHT;
+	elif not moveDir and velocity.x:
+		return frictionCoef * -velocity.x * Vector2.RIGHT;
 	else:
 		return Vector2();

@@ -2,11 +2,13 @@ extends KinematicBody2D
 
 export(float) var gravity:= 700.0;
 
-export(float) var frictionCoef:= 10;
+export(float) var frictionCoef:= 30;
 
 export(float) var inputTimeEpsilon:= 0.1;
 
-enum JumpState { IDLE, JUMPING }
+enum CrouchState { IDLE, CROUCHING }
+
+enum JumpState { IDLE, JUMPING, RECOVERY }
 
 export(float) var jumpCoyoteTime:= 0.1;
 export(float) var jumpHeight:= 80;
@@ -24,6 +26,9 @@ export(float) var airMoveForceScale:= 0.7;
 export(float) var moveForce:= 700.0;
 
 var moveForceAir: float;
+
+var crouchState;
+var crouchStateTime: float;
 
 var jumpState;
 var jumpStateTime: float;
@@ -49,6 +54,8 @@ func _ready():
 	
 	moveForceAir = airMoveForceScale * moveForce;
 	
+	crouchState = CrouchState.IDLE;
+	
 	jumpState = JumpState.IDLE;
 	jumpStateTime = 1e20;
 	
@@ -63,6 +70,7 @@ func _ready():
 
 func _process(delta):
 	var jump = Input.is_action_pressed("jump");
+	var crouch = Input.is_action_pressed("crouch");
 	var moveDir:= ((-1 if Input.is_action_pressed("move_left" ) else 0) +
 			 		( 1 if Input.is_action_pressed("move_right") else 0));
 	
@@ -84,7 +92,24 @@ func _process(delta):
 		velocity.y = sign(velocity.y) * maxSpeedX;
 	
 	velocity = move_and_slide(velocity, Vector2.UP);
-	
+
+func processCrouch(delta, crouch) -> void:
+	match crouchState:
+		CrouchState.IDLE:
+			crouchStateTime += delta;
+			
+			if not crouch:
+				return;
+			
+			crouchState = CrouchState.CROUCHING;
+			crouchStateTime = 0;
+		CrouchState.CROUCHING:
+			if not crouch:
+				crouchState = CrouchState.IDLE;
+				crouchStateTime = 0;
+			else:
+				crouchStateTime += delta;
+
 func processJump(delta, jump) -> void:
 	match jumpState:
 		JumpState.IDLE:
@@ -99,14 +124,26 @@ func processJump(delta, jump) -> void:
 			
 			jumpState = JumpState.JUMPING;
 			jumpStateTime = 0;
+			
+			updateAnimationState();
 		JumpState.JUMPING:
 			var falling = (velocity.y > 0);
-			var onFloor = (is_on_floor() and jumpStateTime > 0);
-			if falling or onFloor or not jump:
-				if not falling and not onFloor:
-					velocity.y = max(velocity.y, -jumpSpeedMin);
+			if is_on_floor() and jumpStateTime > 0:
 				jumpState = JumpState.IDLE;
 				jumpStateTime = 0;
+				updateAnimationState();
+			elif falling or not jump:
+				if not falling:
+					velocity.y = max(velocity.y, -jumpSpeedMin);
+				jumpState = JumpState.RECOVERY;
+				jumpStateTime = 0;
+			else:
+				jumpStateTime += delta;
+		JumpState.RECOVERY:
+			if is_on_floor():
+				jumpState = JumpState.IDLE;
+				jumpStateTime = 0;
+				updateAnimationState();
 			else:
 				jumpStateTime += delta;
 
@@ -121,10 +158,11 @@ func processMove(delta, moveDir) -> Vector2:
 				
 			applyForce = true;
 			setFacing(moveDir);
+			
 			moveState = (MoveState.MOVE_LEFT if moveDir == -1 else MoveState.MOVE_RIGHT);
 			moveStateTime = 0;
 			
-			$AnimationPlayer.play("Walking");
+			updateAnimationState();
 		MoveState.MOVE_LEFT, MoveState.MOVE_RIGHT:
 			if moveDir:
 				var newMoveState = (MoveState.MOVE_LEFT if moveDir == -1 else MoveState.MOVE_RIGHT);
@@ -133,13 +171,16 @@ func processMove(delta, moveDir) -> Vector2:
 				else:
 					velocity.x = 0;
 					setFacing(moveDir);
+					
 					moveState = newMoveState;
 					moveStateTime = 0;
 			elif abs(velocity.x) < minSpeedEpsilon:
 					velocity.x = 0;
+					
 					moveState = MoveState.IDLE;
 					moveStateTime = 0;
-					$AnimationPlayer.play("Idle");
+					
+					updateAnimationState();
 	if applyForce:
 		var forceScalar = (moveForce if is_on_floor() else moveForceAir);
 		return moveDir * forceScalar * Vector2.RIGHT;
@@ -147,3 +188,16 @@ func processMove(delta, moveDir) -> Vector2:
 		return frictionCoef * -velocity.x * Vector2.RIGHT;
 	else:
 		return Vector2();
+
+func updateAnimationState() -> void:
+	match jumpState:
+		JumpState.IDLE:
+			match moveState:
+				MoveState.IDLE:
+					$AnimationPlayer.play("Idle");
+					return
+				MoveState.MOVE_LEFT, MoveState.MOVE_RIGHT:
+					$AnimationPlayer.play("Walking");
+					return
+		JumpState.JUMPING:
+			$AnimationPlayer.play("Jump");

@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
-const gravity:= 700.0;
+export(float) var gravity:= 700.0;
 
-const frictionCoef:= 8;
+export(float) var frictionCoef:= 8;
 
 export(float) var inputTimeEpsilon:= 0.1;
 

@@ -5,7 +5,7 @@ var direction := 1
 func _ready():
 	pass
 	
-func _process(delta):
+func _physics_process(delta):
 	if $collisionRight.is_colliding():
 		direction = -1
 		

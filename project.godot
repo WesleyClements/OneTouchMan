@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://player/playerController.gd"
+} ]
 _global_script_class_icons={
-
+"Player": ""
 }
 
 [application]
@@ -18,6 +23,10 @@ _global_script_class_icons={
 config/name="OneTouchMan"
 run/main_scene="res://main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+globals="*res://autoload/globals.gd"
 
 [input]
 

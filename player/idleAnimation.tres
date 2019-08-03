@@ -5,7 +5,7 @@ resource_name = "Walking"
 length = 1.2
 loop = true
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("sprites/body:position:y")
+tracks/0/path = NodePath("playerBodySprites/body:position:y")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -15,7 +15,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6, 0.899912, 1.2 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("sprites/arm1:position:y")
+tracks/1/path = NodePath("playerBodySprites/arm1:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -25,7 +25,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("sprites/arm2:position:y")
+tracks/2/path = NodePath("playerBodySprites/arm2:position:y")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -35,7 +35,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 )
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("sprites/leg1:position")
+tracks/3/path = NodePath("playerBodySprites/leg1:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -47,7 +47,7 @@ tracks/3/keys = {
 "values": [ Vector2( 4, 1 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("sprites/leg2:position")
+tracks/4/path = NodePath("playerBodySprites/leg2:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -59,7 +59,7 @@ tracks/4/keys = {
 "values": [ Vector2( -4, 1 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("sprites/leg1:rotation_degrees")
+tracks/5/path = NodePath("playerBodySprites/leg1:rotation_degrees")
 tracks/5/interp = 2
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -71,7 +71,7 @@ tracks/5/keys = {
 "values": [ 0.0 ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("sprites/leg2:rotation_degrees")
+tracks/6/path = NodePath("playerBodySprites/leg2:rotation_degrees")
 tracks/6/interp = 2
 tracks/6/loop_wrap = true
 tracks/6/imported = false

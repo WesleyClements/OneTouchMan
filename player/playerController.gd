@@ -18,7 +18,7 @@ enum MoveState { IDLE, MOVE_LEFT, MOVE_RIGHT }
 export(float) var maxSpeedX:= 200;
 export(float) var maxSpeedY:= 500;
 export(float) var airMoveForceScale:= 0.7;
-export(float) var moveForce:= 700;
+export(float) var moveForce:= 700.0;
 
 var moveForceAir: float;
 
@@ -30,7 +30,13 @@ var moveStateTime: float;
 
 var velocity: Vector2;
 
-var facing: int;
+var facing: int setget setFacing;
+func setFacing(newFacing) -> void:
+	facing = newFacing;
+	if facing == -1:
+		$sprites.set_flip_h(false);
+	else:
+		$sprites.set_flip_h(true);
 
 var timeOffGround;
 
@@ -55,7 +61,6 @@ func _ready():
 
 func _process(delta):
 	var jump = Input.is_action_pressed("jump");
-	var dash = Input.is_action_pressed("dash");
 	
 	var moveDir:= ((-1 if Input.is_action_pressed("move_left" ) else 0) +
 			 		( 1 if Input.is_action_pressed("move_right") else 0));
@@ -91,7 +96,7 @@ func processJump(delta, jump) -> void:
 			
 			velocity += jumpSpeed * Vector2.UP;
 			
-			jumpState = JumpState.JUMP;
+			jumpState = JumpState.JUMPING;
 			jumpStateTime = 0;
 		JumpState.JUMPING:
 			var falling = (velocity.y > 0);

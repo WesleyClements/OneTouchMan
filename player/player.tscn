@@ -13,8 +13,9 @@ shape = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 0.5, 0.5 )
 
-[node name="sprites" type="Node" parent="."]
+[node name="sprites" type="Node2D" parent="."]
 
 [node name="body" type="Sprite" parent="sprites"]
 texture = ExtResource( 3 )

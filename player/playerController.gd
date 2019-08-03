@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 export(float) var gravity:= 700.0;
 
-export(float) var frictionCoef:= 8;
+export(float) var frictionCoef:= 10;
 
 export(float) var inputTimeEpsilon:= 0.1;
 
@@ -18,7 +18,7 @@ var jumpSpeedMin: float;
 enum MoveState { IDLE, MOVE_LEFT, MOVE_RIGHT }
 
 export(float) var maxSpeedX:= 200;
-export(float) var maxSpeedY:= 500;
+export(float) var maxSpeedY:= 1000;
 export(float) var minSpeedEpsilon = 5;
 export(float) var airMoveForceScale:= 0.7;
 export(float) var moveForce:= 700.0;
@@ -44,8 +44,8 @@ func setFacing(newFacing) -> void:
 var timeOffGround;
 
 func _ready():
-	jumpSpeedMin = sqrt(2 * jumpHeightMin * gravity);
 	jumpSpeed = sqrt(2 * jumpHeight * gravity);
+	jumpSpeedMin = sqrt(2 * jumpHeightMin * gravity);
 	
 	moveForceAir = airMoveForceScale * moveForce;
 	
@@ -103,10 +103,10 @@ func processJump(delta, jump) -> void:
 			var falling = (velocity.y > 0);
 			var onFloor = (is_on_floor() and jumpStateTime > 0);
 			if falling or onFloor or not jump:
+				if not falling and not onFloor:
+					velocity.y = max(velocity.y, -jumpSpeedMin);
 				jumpState = JumpState.IDLE;
 				jumpStateTime = 0;
-				if not falling and not onFloor:
-					velocity.y = max(velocity.y, jumpSpeedMin);
 			else:
 				jumpStateTime += delta;
 
@@ -143,7 +143,7 @@ func processMove(delta, moveDir) -> Vector2:
 	if applyForce:
 		var forceScalar = (moveForce if is_on_floor() else moveForceAir);
 		return moveDir * forceScalar * Vector2.RIGHT;
-	elif not moveDir and velocity.x:
+	elif is_on_floor() and not moveDir and velocity.x:
 		return frictionCoef * -velocity.x * Vector2.RIGHT;
 	else:
 		return Vector2();

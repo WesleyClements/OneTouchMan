@@ -34,6 +34,11 @@ position = Vector2( 0, -8 )
 enabled = true
 cast_to = Vector2( 48, 0 )
 
+[node name="collisionLeft" type="RayCast2D" parent="."]
+position = Vector2( 0, -8 )
+enabled = true
+cast_to = Vector2( -48, 0 )
+
 [node name="sprite" type="Node2D" parent="."]
 
 [node name="cornea" type="Sprite" parent="sprite"]

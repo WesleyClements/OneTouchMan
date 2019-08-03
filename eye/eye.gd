@@ -8,6 +8,9 @@ func _ready():
 func _process(delta):
 	if $collisionRight.is_colliding():
 		direction = -1
+		
+	if $collisionLeft.is_colliding():
+		direction = 1
 	
 	move_and_slide(Vector2(60 * direction, 0))
 	

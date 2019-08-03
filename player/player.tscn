@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://player/playerController.gd" type="Script" id=1]
 [ext_resource path="res://player/playerCollider.tres" type="Shape2D" id=2]
 [ext_resource path="res://player/player.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Idle"
 
 [node name="player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -54,3 +57,6 @@ texture = ExtResource( 3 )
 offset = Vector2( 0, 6 )
 region_enabled = true
 region_rect = Rect2( 16, 0, 4, 16 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Idle = SubResource( 1 )

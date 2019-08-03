@@ -42,7 +42,6 @@ func setFacing(newFacing) -> void:
 
 var timeOffGround;
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	jumpSpeedMin = sqrt(2 * jumpHeightMin * gravity);
 	jumpSpeed = sqrt(2 * jumpHeight * gravity);

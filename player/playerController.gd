@@ -44,8 +44,8 @@ var timeOffGround;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	jumpSpeedMin = -sqrt(2 * jumpHeightMin * gravity);
-	jumpSpeed = -sqrt(2 * jumpHeight * gravity);
+	jumpSpeedMin = sqrt(2 * jumpHeightMin * gravity);
+	jumpSpeed = sqrt(2 * jumpHeight * gravity);
 	
 	moveForceAir = airMoveForceScale * moveForce;
 	
@@ -63,7 +63,6 @@ func _ready():
 
 func _process(delta):
 	var jump = Input.is_action_pressed("jump");
-	
 	var moveDir:= ((-1 if Input.is_action_pressed("move_left" ) else 0) +
 			 		( 1 if Input.is_action_pressed("move_right") else 0));
 	

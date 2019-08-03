@@ -19,6 +19,7 @@ enum MoveState { IDLE, MOVE_LEFT, MOVE_RIGHT }
 
 export(float) var maxSpeedX:= 200;
 export(float) var maxSpeedY:= 500;
+export(float) var minSpeedEpsilon = 5;
 export(float) var airMoveForceScale:= 0.7;
 export(float) var moveForce:= 700.0;
 
@@ -122,6 +123,8 @@ func processMove(delta, moveDir) -> Vector2:
 			setFacing(moveDir);
 			moveState = (MoveState.MOVE_LEFT if moveDir == -1 else MoveState.MOVE_RIGHT);
 			moveStateTime = 0;
+			
+			$AnimationPlayer.play("Walking");
 		MoveState.MOVE_LEFT, MoveState.MOVE_RIGHT:
 			if moveDir:
 				var newMoveState = (MoveState.MOVE_LEFT if moveDir == -1 else MoveState.MOVE_RIGHT);
@@ -132,10 +135,11 @@ func processMove(delta, moveDir) -> Vector2:
 					setFacing(moveDir);
 					moveState = newMoveState;
 					moveStateTime = 0;
-			else:
-				if velocity.x == 0:
+			elif abs(velocity.x) < minSpeedEpsilon:
+					velocity.x = 0;
 					moveState = MoveState.IDLE;
 					moveStateTime = 0;
+					$AnimationPlayer.play("Idle");
 	if applyForce:
 		var forceScalar = (moveForce if is_on_floor() else moveForceAir);
 		return moveDir * forceScalar * Vector2.RIGHT;

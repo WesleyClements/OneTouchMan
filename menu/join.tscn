@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://menu/join.gd" type="Script" id=1]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="IP" type="LineEdit" parent="."]
+margin_left = 57.0
+margin_top = 53.0
+margin_right = 421.0
+margin_bottom = 146.0
+placeholder_text = "I.P. Address"
+script = ExtResource( 1 )
+
+[node name="Port" type="LineEdit" parent="."]
+margin_left = 58.0
+margin_top = 228.0
+margin_right = 425.0
+margin_bottom = 332.0
+placeholder_text = "Port"
+script = ExtResource( 1 )
+
+[node name="Done" type="Button" parent="."]
+margin_left = 807.0
+margin_top = 492.0
+margin_right = 935.0
+margin_bottom = 561.0
+text = "Done"
+script = ExtResource( 1 )
+[connection signal="text_entered" from="IP" to="." method="_onIPAddressEntered"]

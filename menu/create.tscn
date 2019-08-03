@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://menu/create.gd" type="Script" id=1]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Done" type="Button" parent="."]
+margin_left = 795.0
+margin_top = 457.423
+margin_right = 940.0
+margin_bottom = 527.423
+text = "Done"
+script = ExtResource( 1 )
+
+[node name="IP" type="LineEdit" parent="."]
+margin_left = 61.0
+margin_top = 53.0
+margin_right = 427.0
+margin_bottom = 134.0
+placeholder_text = "I.P. Address"
+script = ExtResource( 1 )
+
+[node name="Port" type="LineEdit" parent="."]
+margin_left = 62.0
+margin_top = 220.0
+margin_right = 432.0
+margin_bottom = 306.0
+placeholder_text = "Port"
+script = ExtResource( 1 )
+
+[node name="Num Players" type="LineEdit" parent="."]
+margin_left = 52.0
+margin_top = 379.0
+margin_right = 431.0
+margin_bottom = 473.0
+placeholder_text = "Expected Players"
+script = ExtResource( 1 )
+[connection signal="pressed" from="Done" to="." method="_onDoneButtonPressed"]
+[connection signal="text_entered" from="IP" to="." method="_onIPAddressEntered"]
+[connection signal="text_entered" from="Port" to="." method="_onPortEntered"]
+[connection signal="text_entered" from="Num Players" to="." method="_onExpectedPlayersEntered"]

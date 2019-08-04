@@ -1,25 +1,22 @@
 extends Control
 
-var ipAddress = '127.0.0.1'
-var port = 0
-var expectedPlayers = 4
-
 var ipAddressEntered = false
 var portEntered = false
-var expectedPlayersEntered = false
+var playerCountEntered = false
 
 func _onIPAddressEntered(newIP):
-	ipAddress = newIP
+	globals.serverIP = newIP
 	ipAddressEntered = true
 
 func _onPortEntered(newPort):
-	port = newPort
+	globals.serverPort = newPort
 	portEntered = true
 
 func _onExpectedPlayersEntered(newNum):
-	expectedPlayers = newNum
-	expectedPlayersEntered = true
+	globals.playerCount = newNum
+	playerCountEntered = true
 
 func _onDoneButtonPressed():
-	if ipAddressEntered and portEntered and expectedPlayersEntered:
+	if ipAddressEntered and portEntered and playerCountEntered:
 		#move to lobby and establish connections
+		pass

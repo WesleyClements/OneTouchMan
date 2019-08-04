@@ -5,7 +5,7 @@ var usernameEntered = false
 
 func _onTextFieldChanged(newName):
 	username = newName
-	usernameEnetered = true
+	usernameEntered = true
 
 func _onTextFieldEntered(newName):
 	username = newName
@@ -14,7 +14,9 @@ func _onTextFieldEntered(newName):
 func _onJoinButtonPressed():
 	if usernameEntered:
 		#call join.gd
+		pass
 
 func _onCreateButtonPressed():
 	if usernameEntered:
 		#call create.gd
+		pass

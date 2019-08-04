@@ -1,13 +1,17 @@
-extends Control
+extends Label
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	text = 'Establishing connection... \n'
+	var network = NetworkedMultiplayerENet.new()
+	network.create_client(globals.serverIP, globals.serverPort)
+	get_tree().set_network_peer(network)
+	network.connect('connection_failed', self, '_onConnectionFailed')
+	get_tree().multiplayer.connect('network_peer_packet', self, '_onPacketReceived')
+	
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _onConnectionFailed(error):
+	pass
+	
+
+func _onPacketReceived(packet):
+	pass

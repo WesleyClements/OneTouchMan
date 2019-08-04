@@ -1,11 +1,8 @@
-extends Control
+extends Label
 
 #each player has a username, ip address, and socket object
-var players = {}
+
 var numConnectedPlayers = 0
-var numExpectedPlayers = 4
-var serverIP = '127.0.0.1'
-var serverPort = 0
 
 #create waiting socket
 #remember addresses of new connections, then receive player data from them
@@ -14,13 +11,22 @@ var serverPort = 0
 #once numConnectedPlayers equals numExpectedPlayers, hit done to start the game
 #this sends the initial gamestate to the player clients
 
-func _ready(numPlayers, ):
-	pass 
+func _ready():
+	text = 'Establishing connections... \n'
+	var network = NetworkedMultiplayerENet.new()
+	network.create_server(globals.serverPort, globals.playerCount)
+	get_tree().set_network_peer(network)
+	network.connect('peer_connected', self, '_onPeerConnected')
+	network.connect('peer_disconnected', self, '_onPeerDisconnected')
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _onPeerConnected(username):
+	text = text + '\n' + str(username) + 'connected'
+	numConnectedPlayers+= 1
 
+func _onPeerDisconnected(username):
+	text = text + '\n' + str(username) + 'disconnected'
+	numConnectedPlayers-= 1
 
-func _onStartPressed():
+func _onStartGamePressed():
 	#launch game
+	pass

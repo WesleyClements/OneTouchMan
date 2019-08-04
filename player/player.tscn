@@ -8,7 +8,7 @@
 [ext_resource path="res://player/playerCollider.tres" type="Shape2D" id=6]
 [ext_resource path="res://player/idleAnimation.tres" type="Animation" id=7]
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=1]
 resource_name = "Shoot"
 length = 0.3
 tracks/0/type = "bezier"
@@ -22,8 +22,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.0469835, 0.3 )
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "Crouch"
+[sub_resource type="Animation" id=2]
 length = 0.2
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("sprites/body:position:y")
@@ -142,8 +141,7 @@ tracks/9/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "CrouchedIdle"
+[sub_resource type="Animation" id=3]
 length = 1.2
 loop = true
 tracks/0/type = "bezier"
@@ -225,8 +223,7 @@ tracks/6/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "CrouchedJump"
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprites/body:position")
 tracks/0/interp = 1
@@ -308,8 +305,7 @@ tracks/6/keys = {
 "times": PoolRealArray( 0, 0.5 )
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "CrouchedWalking"
+[sub_resource type="Animation" id=5]
 length = 1.2
 loop = true
 tracks/0/type = "bezier"
@@ -387,8 +383,7 @@ tracks/6/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 )
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "Falling"
+[sub_resource type="Animation" id=6]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprites/body:position")
@@ -471,7 +466,7 @@ tracks/6/keys = {
 "times": PoolRealArray( 0, 0.5, 1 )
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprites/body:position")
@@ -554,8 +549,7 @@ tracks/6/keys = {
 "times": PoolRealArray( 0, 0.5 )
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "JumpRecovery"
+[sub_resource type="Animation" id=8]
 length = 0.75
 loop = true
 tracks/0/type = "value"
@@ -639,7 +633,7 @@ tracks/6/keys = {
 "times": PoolRealArray( 0, 0.375, 0.75 )
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 length = 0.1
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("sprites/body:position:y")
@@ -758,7 +752,7 @@ tracks/9/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 1.2
 loop = true
 tracks/0/type = "bezier"
@@ -903,17 +897,17 @@ script = ExtResource( 4 )
 scale = Vector2( -1, 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="sprites/arm1Rig"]
-anims/Shoot = SubResource( 10 )
+anims/Shoot = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
-anims/Crouch = SubResource( 1 )
-anims/CrouchedIdle = SubResource( 2 )
-anims/CrouchedJump = SubResource( 3 )
-anims/CrouchedWalking = SubResource( 4 )
-anims/Falling = SubResource( 5 )
+anims/Crouch = SubResource( 2 )
+anims/CrouchedIdle = SubResource( 3 )
+anims/CrouchedJump = SubResource( 4 )
+anims/CrouchedWalking = SubResource( 5 )
+anims/Falling = SubResource( 6 )
 anims/Idle = ExtResource( 7 )
-anims/Jump = SubResource( 6 )
-anims/JumpRecovery = SubResource( 7 )
-anims/Uncrouch = SubResource( 8 )
-anims/Walking = SubResource( 9 )
+anims/Jump = SubResource( 7 )
+anims/JumpRecovery = SubResource( 8 )
+anims/Uncrouch = SubResource( 9 )
+anims/Walking = SubResource( 10 )

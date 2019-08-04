@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://mainMenu.gd" type="Script" id=1]
 [ext_resource path="res://menu/start.gd" type="Script" id=2]
 [ext_resource path="res://title.png" type="Texture" id=3]
 [ext_resource path="res://menuTheme.tres" type="Theme" id=4]
-[ext_resource path="res://menu/createSetUp.gd" type="Script" id=5]
-[ext_resource path="res://menu/createLobby.gd" type="Script" id=6]
+[ext_resource path="res://menu/lobby.gd" type="Script" id=5]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -23,7 +22,7 @@ script = ExtResource( 2 )
 margin_left = 53.0
 margin_top = 200.0
 margin_right = 971.0
-margin_bottom = 371.0
+margin_bottom = 399.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
@@ -43,116 +42,57 @@ align = 1
 placeholder_text = "Username"
 caret_blink = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Start/VBoxContainer"]
+[node name="HBoxContainer1" type="HBoxContainer" parent="Start/VBoxContainer"]
 margin_top = 133.0
 margin_right = 918.0
-margin_bottom = 171.0
+margin_bottom = 157.0
+
+[node name="IP" type="LineEdit" parent="Start/VBoxContainer/HBoxContainer1"]
+margin_right = 856.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+align = 1
+placeholder_text = "IP Address"
+
+[node name="Port" type="LineEdit" parent="Start/VBoxContainer/HBoxContainer1"]
+margin_left = 860.0
+margin_right = 918.0
+margin_bottom = 24.0
+align = 1
+placeholder_text = "Port"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Start/VBoxContainer"]
+margin_top = 161.0
+margin_right = 918.0
+margin_bottom = 181.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 40
 
-[node name="Create" type="Button" parent="Start/VBoxContainer/HBoxContainer"]
+[node name="Create" type="Button" parent="Start/VBoxContainer/HBoxContainer2"]
 margin_right = 439.0
-margin_bottom = 38.0
+margin_bottom = 20.0
 size_flags_horizontal = 3
 text = "Create"
 
-[node name="Join" type="Button" parent="Start/VBoxContainer/HBoxContainer"]
+[node name="Join" type="Button" parent="Start/VBoxContainer/HBoxContainer2"]
 margin_left = 479.0
 margin_right = 918.0
-margin_bottom = 38.0
+margin_bottom = 20.0
 size_flags_horizontal = 3
 text = "Join"
 
-[node name="Create" type="Node2D" parent="."]
-
-[node name="SetUp" type="MarginContainer" parent="Create"]
-visible = false
-margin_right = 1024.0
-margin_bottom = 571.0
-custom_constants/margin_right = 53
-custom_constants/margin_top = 150
-custom_constants/margin_left = 53
-custom_constants/margin_bottom = 150
-script = ExtResource( 5 )
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Create/SetUp"]
-margin_left = 53.0
-margin_top = 150.0
-margin_right = 971.0
-margin_bottom = 421.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 40
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Create/SetUp/HBoxContainer"]
-margin_right = 439.0
-margin_bottom = 271.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Create/SetUp/HBoxContainer/VBoxContainer"]
-margin_top = 111.0
-margin_right = 439.0
-margin_bottom = 135.0
-
-[node name="IP" type="LineEdit" parent="Create/SetUp/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_right = 377.0
-margin_bottom = 24.0
-size_flags_horizontal = 3
-text = "127.0.0.1"
-align = 1
-editable = false
-placeholder_text = "IP Address"
-
-[node name="Port" type="LineEdit" parent="Create/SetUp/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 381.0
-margin_right = 439.0
-margin_bottom = 24.0
-text = "3550"
-align = 1
-editable = false
-placeholder_text = "Port"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Create/SetUp/HBoxContainer/VBoxContainer"]
-margin_top = 139.0
-margin_right = 439.0
-margin_bottom = 159.0
-
-[node name="Label" type="Label" parent="Create/SetUp/HBoxContainer/VBoxContainer/HBoxContainer2"]
-margin_top = 3.0
-margin_right = 299.0
-margin_bottom = 17.0
-size_flags_horizontal = 3
-text = "Number of Players"
-align = 1
-
-[node name="NumberPlayers" type="OptionButton" parent="Create/SetUp/HBoxContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 303.0
-margin_right = 439.0
-margin_bottom = 20.0
-disabled = true
-text = "4"
-align = 1
-items = [ "2", null, false, 2, null, "3", null, false, 3, null, "4", null, false, 4, null ]
-selected = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Create/SetUp/HBoxContainer"]
-margin_left = 479.0
+[node name="Error" type="Label" parent="Start/VBoxContainer"]
+margin_top = 185.0
 margin_right = 918.0
-margin_bottom = 271.0
+margin_bottom = 199.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+align = 1
+max_lines_visible = 1
 
-[node name="Done" type="Button" parent="Create/SetUp/HBoxContainer/CenterContainer"]
-margin_left = 196.0
-margin_top = 125.0
-margin_right = 242.0
-margin_bottom = 145.0
-size_flags_horizontal = 3
-disabled = true
-text = "Done"
+[node name="Create" type="Node2D" parent="."]
 
 [node name="Lobby" type="MarginContainer" parent="Create"]
 editor/display_folded = true
@@ -163,7 +103,7 @@ custom_constants/margin_right = 53
 custom_constants/margin_top = 150
 custom_constants/margin_left = 53
 custom_constants/margin_bottom = 150
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Create/Lobby"]
 margin_left = 53.0
@@ -196,65 +136,6 @@ text = "Start"
 
 [node name="Join" type="Node2D" parent="."]
 
-[node name="SetUp" type="MarginContainer" parent="Join"]
-visible = false
-margin_right = 1024.0
-margin_bottom = 571.0
-custom_constants/margin_right = 53
-custom_constants/margin_top = 150
-custom_constants/margin_left = 53
-custom_constants/margin_bottom = 150
-script = ExtResource( 5 )
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Join/SetUp"]
-margin_left = 53.0
-margin_top = 150.0
-margin_right = 971.0
-margin_bottom = 421.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 40
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Join/SetUp/HBoxContainer"]
-margin_right = 439.0
-margin_bottom = 271.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="IP" type="LineEdit" parent="Join/SetUp/HBoxContainer/HBoxContainer"]
-margin_right = 377.0
-margin_bottom = 271.0
-size_flags_horizontal = 3
-text = "127.0.0.1"
-align = 1
-editable = false
-placeholder_text = "IP Address"
-
-[node name="Port" type="LineEdit" parent="Join/SetUp/HBoxContainer/HBoxContainer"]
-margin_left = 381.0
-margin_right = 439.0
-margin_bottom = 271.0
-text = "3550"
-align = 1
-editable = false
-placeholder_text = "Port"
-
-[node name="CenterContainer" type="CenterContainer" parent="Join/SetUp/HBoxContainer"]
-margin_left = 479.0
-margin_right = 918.0
-margin_bottom = 271.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Done" type="Button" parent="Join/SetUp/HBoxContainer/CenterContainer"]
-margin_left = 196.0
-margin_top = 125.0
-margin_right = 242.0
-margin_bottom = 145.0
-size_flags_horizontal = 3
-disabled = true
-text = "Done"
-
 [node name="Lobby" type="MarginContainer" parent="Join"]
 visible = false
 margin_right = 1024.0
@@ -263,7 +144,7 @@ custom_constants/margin_right = 53
 custom_constants/margin_top = 150
 custom_constants/margin_left = 53
 custom_constants/margin_bottom = 150
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Join/Lobby"]
 margin_left = 53.0
@@ -295,14 +176,9 @@ disabled = true
 text = "Start"
 [connection signal="text_changed" from="Start/VBoxContainer/Username" to="." method="_onTextFieldChanged"]
 [connection signal="text_entered" from="Start/VBoxContainer/Username" to="." method="_onTextFieldEntered"]
-[connection signal="pressed" from="Start/VBoxContainer/HBoxContainer/Create" to="." method="_onCreateButtonPressed"]
-[connection signal="pressed" from="Start/VBoxContainer/HBoxContainer/Join" to="." method="_onJoinButtonPressed"]
-[connection signal="text_entered" from="Create/SetUp/HBoxContainer/VBoxContainer/HBoxContainer/IP" to="." method="_onIPEntered"]
-[connection signal="text_entered" from="Create/SetUp/HBoxContainer/VBoxContainer/HBoxContainer/Port" to="." method="_onPortEntered"]
-[connection signal="item_focused" from="Create/SetUp/HBoxContainer/VBoxContainer/HBoxContainer2/NumberPlayers" to="." method="_onPlayerNumberSelected"]
-[connection signal="pressed" from="Create/SetUp/HBoxContainer/CenterContainer/Done" to="." method="_onDoneButtonPressed" binds= [ true ]]
+[connection signal="text_entered" from="Start/VBoxContainer/HBoxContainer1/IP" to="." method="_onIPEntered"]
+[connection signal="text_entered" from="Start/VBoxContainer/HBoxContainer1/Port" to="." method="_onPortEntered"]
+[connection signal="pressed" from="Start/VBoxContainer/HBoxContainer2/Create" to="." method="_onCreateButtonPressed"]
+[connection signal="pressed" from="Start/VBoxContainer/HBoxContainer2/Join" to="." method="_onJoinButtonPressed"]
 [connection signal="pressed" from="Create/Lobby/HBoxContainer/CenterContainer/Start" to="." method="_onStartGamePressed"]
-[connection signal="text_entered" from="Join/SetUp/HBoxContainer/HBoxContainer/IP" to="." method="_onIPEntered"]
-[connection signal="text_entered" from="Join/SetUp/HBoxContainer/HBoxContainer/Port" to="." method="_onPortEntered"]
-[connection signal="pressed" from="Join/SetUp/HBoxContainer/CenterContainer/Done" to="." method="_onDoneButtonPressed" binds= [ false ]]
 [connection signal="pressed" from="Join/Lobby/HBoxContainer/CenterContainer/Start" to="." method="_onStartGamePressed"]

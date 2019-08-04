@@ -57,12 +57,13 @@ _global_script_class_icons={
 [application]
 
 config/name="OneTouchMan"
-run/main_scene="res://main.tscn"
+run/main_scene="res://mainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-globals="*res://autoload/globals.gd"
+Globals="*res://autoload/Globals.gd"
+Networking="*res://autoload/Networking.gd"
 
 [input]
 
@@ -107,4 +108,5 @@ aim_down={
 
 [rendering]
 
+environment/default_clear_color=Color( 0.776471, 0.905882, 0.976471, 1 )
 environment/default_environment="res://default_env.tres"

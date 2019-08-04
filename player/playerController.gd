@@ -84,10 +84,10 @@ func setFacing(newFacing) -> void:
 var timeOffGround;
 
 func _ready():
-	jumpSpeed = sqrt(2 * jumpHeight * globals.gravity);
-	jumpSpeedCrouched = sqrt(2 * jumpHeightCrouched * globals.gravity);
-	jumpSpeedMin = sqrt(2 * jumpHeightMin * globals.gravity);
-	jumpSpeedMinCrouched = sqrt(2 * jumpHeightMinCrouched * globals.gravity);
+	jumpSpeed = sqrt(2 * jumpHeight * Globals.gravity);
+	jumpSpeedCrouched = sqrt(2 * jumpHeightCrouched * Globals.gravity);
+	jumpSpeedMin = sqrt(2 * jumpHeightMin * Globals.gravity);
+	jumpSpeedMinCrouched = sqrt(2 * jumpHeightMinCrouched * Globals.gravity);
 	
 	moveForceAir = airMoveForceScale * moveForce;
 	
@@ -124,7 +124,7 @@ func _physics_process(delta):
 	processCrouch(delta, crouch);
 	processJump(delta, jump);
 	
-	var force = globals.gravity * Vector2.DOWN;
+	var force = Globals.gravity * Vector2.DOWN;
 	
 	var moveForce = processMove(delta, moveDir);
 	

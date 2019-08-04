@@ -1,12 +1,14 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://player/playerController.gd" type="Script" id=1]
 [ext_resource path="res://player/playerCrouchedCollider.tres" type="Shape2D" id=2]
 [ext_resource path="res://player/player.png" type="Texture" id=3]
-[ext_resource path="res://player/playerCollider.tres" type="Shape2D" id=4]
-[ext_resource path="res://player/idleAnimation.tres" type="Animation" id=5]
+[ext_resource path="res://player/playerWeaponSlot.gd" type="Script" id=4]
+[ext_resource path="res://weapons/pistol/pistol.tscn" type="PackedScene" id=5]
+[ext_resource path="res://player/playerCollider.tres" type="Shape2D" id=6]
+[ext_resource path="res://player/idleAnimation.tres" type="Animation" id=7]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "Crouch"
 length = 0.2
 tracks/0/type = "bezier"
@@ -97,7 +99,7 @@ tracks/7/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 4 ), ExtResource( 2 ) ]
+"values": [ ExtResource( 6 ), ExtResource( 2 ) ]
 }
 tracks/8/type = "value"
 tracks/8/path = NodePath("CollisionShape2D:position")
@@ -126,7 +128,7 @@ tracks/9/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
 resource_name = "CrouchedIdle"
 length = 1.2
 loop = true
@@ -209,7 +211,7 @@ tracks/6/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=3]
 resource_name = "CrouchedJump"
 tracks/0/type = "value"
 tracks/0/path = NodePath("playerBodySprites/body:position")
@@ -292,8 +294,10 @@ tracks/6/keys = {
 "times": PoolRealArray( 0, 0.5 )
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=4]
 resource_name = "CrouchedWalking"
+length = 1.2
+loop = true
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("playerBodySprites/leg2:position:y")
 tracks/0/interp = 1
@@ -369,8 +373,91 @@ tracks/6/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 )
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Jump"
+[sub_resource type="Animation" id=5]
+resource_name = "Falling"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("playerBodySprites/body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("playerBodySprites/arm1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -7, -2 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("playerBodySprites/arm2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 7, -2 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("playerBodySprites/leg1:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 4, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("playerBodySprites/leg2:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -4, 1 ) ]
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("playerBodySprites/leg1:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0, -0.204276, -0.00852311, 0.204276, 0.00852311, -10, -0.183303, -0.0464287, 0.183303, 0.0464287, 0, -0.191068, 0.00852311, 0.191068, -0.00852311 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("playerBodySprites/leg2:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 0, -0.204276, -0.00852311, 0.204276, 0.00852311, 10, -0.183303, -0.0464287, 0.183303, 0.0464287, 0, -0.191068, 0.00852311, 0.191068, -0.00852311 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+
+[sub_resource type="Animation" id=6]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("playerBodySprites/body:position")
@@ -453,8 +540,92 @@ tracks/6/keys = {
 "times": PoolRealArray( 0, 0.5 )
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "Uncrouch"
+[sub_resource type="Animation" id=7]
+resource_name = "JumpRecovery"
+length = 0.75
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("playerBodySprites/body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("playerBodySprites/arm1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -7, -2 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("playerBodySprites/arm2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 7, -2 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("playerBodySprites/leg1:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 4, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("playerBodySprites/leg2:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -4, 1 ) ]
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("playerBodySprites/leg1:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( -30, -0.122192, -1.03441, 0.122192, 1.03441, -20, -0.0843462, 0.126286, 0.0843462, -0.126286, -30, -0.0896057, -0.128433, 0.0896057, 0.128433 ),
+"times": PoolRealArray( 0, 0.375, 0.75 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("playerBodySprites/leg2:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 30, -0.0979959, -0.33927, 0.0979959, 0.33927, 20, -0.0661987, -0.106266, 0.0661987, 0.106266, 30, -0.0773504, 0.125864, 0.0773504, -0.125864 ),
+"times": PoolRealArray( 0, 0.375, 0.75 )
+}
+
+[sub_resource type="Animation" id=8]
 length = 0.1
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("playerBodySprites/body:position:y")
@@ -544,7 +715,7 @@ tracks/7/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 2.73208 ),
 "update": 1,
-"values": [ ExtResource( 4 ) ]
+"values": [ ExtResource( 6 ) ]
 }
 tracks/8/type = "value"
 tracks/8/path = NodePath("CollisionShape2D:position")
@@ -573,8 +744,7 @@ tracks/9/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "Walking"
+[sub_resource type="Animation" id=9]
 length = 1.2
 loop = true
 tracks/0/type = "bezier"
@@ -667,7 +837,6 @@ process_mode = 0
 [node name="playerBodySprites" type="Node2D" parent="."]
 
 [node name="body" type="Sprite" parent="playerBodySprites"]
-position = Vector2( 0, 8.91914 )
 z_index = 1
 texture = ExtResource( 3 )
 offset = Vector2( 0, -7 )
@@ -675,15 +844,24 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
 
 [node name="arm1" type="Sprite" parent="playerBodySprites"]
-position = Vector2( -7, 0.482259 )
-z_index = -3
+position = Vector2( -7, -2 )
+rotation = 1.42768
+z_index = -4
 texture = ExtResource( 3 )
 offset = Vector2( 0, 6 )
 region_enabled = true
 region_rect = Rect2( 16, 0, 4, 16 )
 
+[node name="weaponSlot" type="Node2D" parent="playerBodySprites/arm1"]
+position = Vector2( 0, 14 )
+rotation = -1.5708
+script = ExtResource( 4 )
+
+[node name="pistol" parent="playerBodySprites/arm1/weaponSlot" instance=ExtResource( 5 )]
+scale = Vector2( -1, 1 )
+
 [node name="arm2" type="Sprite" parent="playerBodySprites"]
-position = Vector2( 7, 0.47897 )
+position = Vector2( 7, -2 )
 z_index = 2
 texture = ExtResource( 3 )
 offset = Vector2( 0, 6 )
@@ -692,6 +870,7 @@ region_rect = Rect2( 16, 0, 4, 16 )
 
 [node name="leg1" type="Sprite" parent="playerBodySprites"]
 position = Vector2( 4, 1 )
+rotation = -0.0187308
 z_index = -1
 texture = ExtResource( 3 )
 offset = Vector2( 0, 6 )
@@ -700,6 +879,7 @@ region_rect = Rect2( 16, 0, 4, 16 )
 
 [node name="leg2" type="Sprite" parent="playerBodySprites"]
 position = Vector2( -4, 1 )
+rotation = 0.0190077
 z_index = -2
 texture = ExtResource( 3 )
 offset = Vector2( 0, 6 )
@@ -708,13 +888,13 @@ region_rect = Rect2( 16, 0, 4, 16 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
-anims/Crouch = SubResource( 3 )
-anims/CrouchedIdle = SubResource( 5 )
-anims/CrouchedJump = SubResource( 7 )
-anims/CrouchedWalking = SubResource( 6 )
-anims/Idle = ExtResource( 5 )
-anims/Jump = SubResource( 2 )
-anims/Uncrouch = SubResource( 4 )
-anims/Walking = SubResource( 1 )
-
-[node name="weapons" type="Node2D" parent="."]
+anims/Crouch = SubResource( 1 )
+anims/CrouchedIdle = SubResource( 2 )
+anims/CrouchedJump = SubResource( 3 )
+anims/CrouchedWalking = SubResource( 4 )
+anims/Falling = SubResource( 5 )
+anims/Idle = ExtResource( 7 )
+anims/Jump = SubResource( 6 )
+anims/JumpRecovery = SubResource( 7 )
+anims/Uncrouch = SubResource( 8 )
+anims/Walking = SubResource( 9 )

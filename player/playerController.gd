@@ -5,9 +5,13 @@ export(float) var frictionCoef:= 30;
 
 export(float) var inputTimeEpsilon:= 0.1;
 
+export(float) var aimSpeed:= 180 / 1.0;
+export(float) var aimMin:= 0.0;
+export(float) var aimMax:= 180.0;
+
 enum CrouchState { IDLE, CROUCHING, CROUCHED, UNCROUCHING }
 
-enum JumpState { IDLE, JUMPING, RECOVERY }
+enum JumpState { IDLE, JUMPING, RECOVERY, FALLING }
 
 export(float) var jumpCoyoteTime:= 0.1;
 export(float) var jumpHeight:= 100;
@@ -57,6 +61,15 @@ func isCrouched() -> bool:
 var jumpState;
 var jumpStateTime: float;
 
+func isJumping() -> bool:
+	return jumpState == JumpState.JUMPING;
+
+func isFalling() -> bool:
+	return jumpState == JumpState.FALLING;
+
+func isInAir() -> bool:
+	return isJumping() or isFalling();
+
 var moveState;
 var moveStateTime: float;
 
@@ -97,6 +110,9 @@ func _ready():
 func _physics_process(delta):
 	var jump = Input.is_action_pressed("jump");
 	var crouch = Input.is_action_pressed("crouch");
+	var shoot = Input.is_action_pressed("shoot");
+	var aimDir:= ((-1 if Input.is_action_pressed("aim_down" ) else 0) +
+			 		( 1 if Input.is_action_pressed("aim_up") else 0));
 	var moveDir:= ((-1 if Input.is_action_pressed("move_left" ) else 0) +
 			 		( 1 if Input.is_action_pressed("move_right") else 0));
 	
@@ -105,6 +121,8 @@ func _physics_process(delta):
 	else:
 		timeOffGround += delta;
 	
+	processShoot(delta, shoot);
+	processAim(delta, aimDir);
 	processCrouch(delta, crouch);
 	processJump(delta, jump);
 	
@@ -125,6 +143,43 @@ func _physics_process(delta):
 		velocity.y = sign(velocity.y) * maxSpeedX;
 	
 	velocity = move_and_slide(velocity, Vector2.UP);
+	
+func processShoot(delta, shoot) -> void:
+	if not shoot:
+		return;
+	
+	var weapon = $playerBodySprites/arm1/weaponSlot/pistol;
+	if not weapon.canShoot():
+		return;
+
+	var bullet = weapon.createBullet();
+	bullet.dir = ($playerBodySprites/arm1/weaponSlot.get_relative_transform_to_parent(self).origin -
+					$playerBodySprites/arm1.get_relative_transform_to_parent(self).origin).normalized();
+	bullet.position = to_global($playerBodySprites/arm1/weaponSlot/pistol/firePoint.get_relative_transform_to_parent(self).origin);
+	bullet.rotation = bullet.dir.angle();
+	bullet.scale.x = $playerBodySprites.scale.x;
+	
+	get_parent().add_child(bullet);
+	weapon.resetFireTimer();
+
+func processAim(delta, aimDir) -> void:
+	match aimDir:
+		0:
+			return;
+		-1:
+			if $playerBodySprites/arm1.rotation_degrees > aimMin:
+				$playerBodySprites/arm1.rotation_degrees -= aimSpeed * delta;
+			else:
+				return;
+			if $playerBodySprites/arm1.rotation_degrees < aimMin:
+				$playerBodySprites/arm1.rotation_degrees = aimMin;
+		1:
+			if $playerBodySprites/arm1.rotation_degrees < aimMax:
+				$playerBodySprites/arm1.rotation_degrees += aimSpeed * delta;
+			else:
+				return;
+			if $playerBodySprites/arm1.rotation_degrees > aimMax:
+				$playerBodySprites/arm1.rotation_degrees = aimMax;
 
 func processCrouch(delta, crouch) -> void:
 	if !is_on_floor():
@@ -156,11 +211,15 @@ func processJump(delta, jump) -> void:
 		JumpState.IDLE:
 			jumpStateTime += delta;
 			
-			if isCrouching():
+			if not (is_on_floor() or timeOffGround < jumpCoyoteTime):
+				jumpState = JumpState.FALLING;
+				jumpStateTime = 0;
+				updateAnimationState();
 				return;
+			
 			if not jump:
 				return;
-			if not (is_on_floor() or timeOffGround < jumpCoyoteTime):
+			if isCrouching():
 				return;
 			
 			var speed = jumpSpeedCrouched if isCrouched() else jumpSpeed;
@@ -171,20 +230,20 @@ func processJump(delta, jump) -> void:
 			
 			updateAnimationState();
 		JumpState.JUMPING:
-			var falling = (velocity.y > 0);
 			if is_on_floor() and jumpStateTime > 0:
 				jumpState = JumpState.IDLE;
 				jumpStateTime = 0;
 				updateAnimationState();
-			elif falling or not jump:
-				if not falling:
+			elif velocity.y > 0 or not jump:
+				if velocity.y <= 0:
 					var speed = -(jumpSpeedMinCrouched if isCrouched() else jumpSpeedMin);
 					velocity.y = max(velocity.y, speed);
 				jumpState = JumpState.RECOVERY;
 				jumpStateTime = 0;
+				updateAnimationState();
 			else:
 				jumpStateTime += delta;
-		JumpState.RECOVERY:
+		JumpState.RECOVERY, JumpState.FALLING:
 			if is_on_floor():
 				jumpState = JumpState.IDLE;
 				jumpStateTime = 0;
@@ -264,3 +323,15 @@ func updateAnimationState() -> void:
 					$AnimationPlayer.play("Jump");
 				CrouchState.CROUCHED:
 					$AnimationPlayer.play("CrouchedJump");
+		JumpState.RECOVERY:
+			match crouchState:
+				CrouchState.IDLE:
+					$AnimationPlayer.play("JumpRecovery");
+				CrouchState.CROUCHED:
+					$AnimationPlayer.play("CrouchedJumpRecovery");
+		JumpState.FALLING:
+			match crouchState:
+				CrouchState.IDLE:
+					$AnimationPlayer.play("Falling");
+				CrouchState.CROUCHED:
+					$AnimationPlayer.play("CrouchedFalling");

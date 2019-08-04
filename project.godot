@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://btree/branch/Selector.gd"
 }, {
+"base": "Reference",
+"class": "Task",
+"language": "GDScript",
+"path": "res://btree/Task.gd"
+}, {
 "base": "Sprite",
 "class": "Weapon",
 "language": "GDScript",
@@ -51,6 +56,7 @@ _global_script_class_icons={
 "Entity": "",
 "Player": "",
 "Selector": "",
+"Task": "",
 "Weapon": ""
 }
 

@@ -1,23 +1,28 @@
-var status: int = globals.TaskStatus.FRESH setget setStatus, getStatus
+class_name Task
+
+var status: int = Globals.TaskStatus.FRESH setget setStatus, getStatus
 
 var parent setget setParent, getParent
 
 var guard setget setGuard, getGuard
 
-func setStatus(var status: int):
-	self.status = status
+func _init():
+	pass
+
+func setStatus(var _status: int):
+	status = _status
 
 func getStatus():
 	return status
 
-func setParent(var parent):
-	self.parent = parent
+func setParent(var _parent):
+	parent = _parent
 
 func getParent():
 	return parent
 
-func setGuard(var parent):
-	self.guard = guard
+func setGuard(var _guard):
+	guard = _guard
 
 func getGuard():
 	return guard

@@ -1,4 +1,4 @@
-extends "Task.gd"
+extends Task
 
 func _init():
-	status = 1
+	print(guard)

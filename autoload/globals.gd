@@ -4,7 +4,7 @@ const gravity:= 700.0;
 
 var players = {}
 var serverIP = '127.0.0.1'
-var serverPort = 0
+var serverPort = 3550
 var playerCount = 4
 
 # Called when the node enters the scene tree for the first time.

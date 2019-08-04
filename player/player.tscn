@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://player/playerController.gd" type="Script" id=1]
 [ext_resource path="res://player/playerCrouchedCollider.tres" type="Shape2D" id=2]
@@ -8,11 +8,25 @@
 [ext_resource path="res://player/playerCollider.tres" type="Shape2D" id=6]
 [ext_resource path="res://player/idleAnimation.tres" type="Animation" id=7]
 
+[sub_resource type="Animation" id=10]
+resource_name = "Shoot"
+length = 0.3
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.00306414, -26.1298, 0.00306414, 26.1298, 50, -0.0153207, -3.25654, 0.0153207, 3.25654, 0, -0.109002, 40.8653, 0.109002, -40.8653 ),
+"times": PoolRealArray( 0, 0.0469835, 0.3 )
+}
+
 [sub_resource type="Animation" id=1]
 resource_name = "Crouch"
 length = 0.2
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("playerBodySprites/body:position:y")
+tracks/0/path = NodePath("sprites/body:position:y")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -22,7 +36,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("playerBodySprites/arm1:position:y")
+tracks/1/path = NodePath("sprites/arm1Rig/arm1:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -32,7 +46,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.2 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("playerBodySprites/arm2:position:y")
+tracks/2/path = NodePath("sprites/arm2:position:y")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -42,7 +56,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.2 )
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("playerBodySprites/leg1:position")
+tracks/3/path = NodePath("sprites/leg1:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -54,7 +68,7 @@ tracks/3/keys = {
 "values": [ Vector2( 4, 1 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("playerBodySprites/leg2:position")
+tracks/4/path = NodePath("sprites/leg2:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -66,7 +80,7 @@ tracks/4/keys = {
 "values": [ Vector2( -4, 1 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("playerBodySprites/leg1:rotation_degrees")
+tracks/5/path = NodePath("sprites/leg1:rotation_degrees")
 tracks/5/interp = 2
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -78,7 +92,7 @@ tracks/5/keys = {
 "values": [ 0.0 ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("playerBodySprites/leg2:rotation_degrees")
+tracks/6/path = NodePath("sprites/leg2:rotation_degrees")
 tracks/6/interp = 2
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -133,7 +147,7 @@ resource_name = "CrouchedIdle"
 length = 1.2
 loop = true
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("playerBodySprites/body:position:y")
+tracks/0/path = NodePath("sprites/body:position:y")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -143,7 +157,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6, 0.899912, 1.2 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("playerBodySprites/arm1:position:y")
+tracks/1/path = NodePath("sprites/arm1Rig/arm1:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -153,7 +167,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("playerBodySprites/arm2:position:y")
+tracks/2/path = NodePath("sprites/arm2:position:y")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -163,7 +177,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 )
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("playerBodySprites/leg1:position")
+tracks/3/path = NodePath("sprites/leg1:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -175,7 +189,7 @@ tracks/3/keys = {
 "values": [ Vector2( 4, 1 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("playerBodySprites/leg2:position")
+tracks/4/path = NodePath("sprites/leg2:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -187,7 +201,7 @@ tracks/4/keys = {
 "values": [ Vector2( -4, 1 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("playerBodySprites/leg1:rotation_degrees")
+tracks/5/path = NodePath("sprites/leg1:rotation_degrees")
 tracks/5/interp = 2
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -199,7 +213,7 @@ tracks/5/keys = {
 "values": [ 0.0 ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("playerBodySprites/leg2:rotation_degrees")
+tracks/6/path = NodePath("sprites/leg2:rotation_degrees")
 tracks/6/interp = 2
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -214,7 +228,7 @@ tracks/6/keys = {
 [sub_resource type="Animation" id=3]
 resource_name = "CrouchedJump"
 tracks/0/type = "value"
-tracks/0/path = NodePath("playerBodySprites/body:position")
+tracks/0/path = NodePath("sprites/body:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -226,7 +240,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 8 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("playerBodySprites/arm1:position")
+tracks/1/path = NodePath("sprites/arm1Rig/arm1:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -238,7 +252,7 @@ tracks/1/keys = {
 "values": [ Vector2( -7, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("playerBodySprites/arm2:position")
+tracks/2/path = NodePath("sprites/arm2:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -250,7 +264,7 @@ tracks/2/keys = {
 "values": [ Vector2( 7, 0 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("playerBodySprites/leg1:position")
+tracks/3/path = NodePath("sprites/leg1:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -262,7 +276,7 @@ tracks/3/keys = {
 "values": [ Vector2( 4, 1 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("playerBodySprites/leg2:position")
+tracks/4/path = NodePath("sprites/leg2:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -274,7 +288,7 @@ tracks/4/keys = {
 "values": [ Vector2( -4, 1 ) ]
 }
 tracks/5/type = "bezier"
-tracks/5/path = NodePath("playerBodySprites/leg1:rotation_degrees")
+tracks/5/path = NodePath("sprites/leg1:rotation_degrees")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -284,7 +298,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.5 )
 }
 tracks/6/type = "bezier"
-tracks/6/path = NodePath("playerBodySprites/leg2:rotation_degrees")
+tracks/6/path = NodePath("sprites/leg2:rotation_degrees")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -299,7 +313,7 @@ resource_name = "CrouchedWalking"
 length = 1.2
 loop = true
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("playerBodySprites/leg2:position:y")
+tracks/0/path = NodePath("sprites/leg2:position:y")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -309,7 +323,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("playerBodySprites/leg1:position:y")
+tracks/1/path = NodePath("sprites/leg1:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -319,7 +333,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 )
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("playerBodySprites/leg1:rotation_degrees")
+tracks/2/path = NodePath("sprites/leg1:rotation_degrees")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -331,7 +345,7 @@ tracks/2/keys = {
 "values": [ 0.0 ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("playerBodySprites/leg2:rotation_degrees")
+tracks/3/path = NodePath("sprites/leg2:rotation_degrees")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -343,7 +357,7 @@ tracks/3/keys = {
 "values": [ 0.0 ]
 }
 tracks/4/type = "bezier"
-tracks/4/path = NodePath("playerBodySprites/body:position:y")
+tracks/4/path = NodePath("sprites/body:position:y")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -353,7 +367,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6, 0.899912, 1.2 )
 }
 tracks/5/type = "bezier"
-tracks/5/path = NodePath("playerBodySprites/arm1:position:y")
+tracks/5/path = NodePath("sprites/arm1Rig/arm1:position:y")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -363,7 +377,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 )
 }
 tracks/6/type = "bezier"
-tracks/6/path = NodePath("playerBodySprites/arm2:position:y")
+tracks/6/path = NodePath("sprites/arm2:position:y")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -377,7 +391,7 @@ tracks/6/keys = {
 resource_name = "Falling"
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("playerBodySprites/body:position")
+tracks/0/path = NodePath("sprites/body:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -389,7 +403,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("playerBodySprites/arm1:position")
+tracks/1/path = NodePath("sprites/arm1Rig/arm1:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -401,7 +415,7 @@ tracks/1/keys = {
 "values": [ Vector2( -7, -2 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("playerBodySprites/arm2:position")
+tracks/2/path = NodePath("sprites/arm2:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -413,7 +427,7 @@ tracks/2/keys = {
 "values": [ Vector2( 7, -2 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("playerBodySprites/leg1:position")
+tracks/3/path = NodePath("sprites/leg1:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -425,7 +439,7 @@ tracks/3/keys = {
 "values": [ Vector2( 4, 1 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("playerBodySprites/leg2:position")
+tracks/4/path = NodePath("sprites/leg2:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -437,7 +451,7 @@ tracks/4/keys = {
 "values": [ Vector2( -4, 1 ) ]
 }
 tracks/5/type = "bezier"
-tracks/5/path = NodePath("playerBodySprites/leg1:rotation_degrees")
+tracks/5/path = NodePath("sprites/leg1:rotation_degrees")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -447,7 +461,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.5, 1 )
 }
 tracks/6/type = "bezier"
-tracks/6/path = NodePath("playerBodySprites/leg2:rotation_degrees")
+tracks/6/path = NodePath("sprites/leg2:rotation_degrees")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -460,7 +474,7 @@ tracks/6/keys = {
 [sub_resource type="Animation" id=6]
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("playerBodySprites/body:position")
+tracks/0/path = NodePath("sprites/body:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -472,7 +486,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("playerBodySprites/arm1:position")
+tracks/1/path = NodePath("sprites/arm1Rig/arm1:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -484,7 +498,7 @@ tracks/1/keys = {
 "values": [ Vector2( -7, -2 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("playerBodySprites/arm2:position")
+tracks/2/path = NodePath("sprites/arm2:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -496,7 +510,7 @@ tracks/2/keys = {
 "values": [ Vector2( 7, -2 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("playerBodySprites/leg1:position")
+tracks/3/path = NodePath("sprites/leg1:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -508,7 +522,7 @@ tracks/3/keys = {
 "values": [ Vector2( 4, 1 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("playerBodySprites/leg2:position")
+tracks/4/path = NodePath("sprites/leg2:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -520,7 +534,7 @@ tracks/4/keys = {
 "values": [ Vector2( -4, 1 ) ]
 }
 tracks/5/type = "bezier"
-tracks/5/path = NodePath("playerBodySprites/leg1:rotation_degrees")
+tracks/5/path = NodePath("sprites/leg1:rotation_degrees")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -530,7 +544,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.5 )
 }
 tracks/6/type = "bezier"
-tracks/6/path = NodePath("playerBodySprites/leg2:rotation_degrees")
+tracks/6/path = NodePath("sprites/leg2:rotation_degrees")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -545,7 +559,7 @@ resource_name = "JumpRecovery"
 length = 0.75
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("playerBodySprites/body:position")
+tracks/0/path = NodePath("sprites/body:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -557,7 +571,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("playerBodySprites/arm1:position")
+tracks/1/path = NodePath("sprites/arm1Rig/arm1:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -569,7 +583,7 @@ tracks/1/keys = {
 "values": [ Vector2( -7, -2 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("playerBodySprites/arm2:position")
+tracks/2/path = NodePath("sprites/arm2:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -581,7 +595,7 @@ tracks/2/keys = {
 "values": [ Vector2( 7, -2 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("playerBodySprites/leg1:position")
+tracks/3/path = NodePath("sprites/leg1:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -593,7 +607,7 @@ tracks/3/keys = {
 "values": [ Vector2( 4, 1 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("playerBodySprites/leg2:position")
+tracks/4/path = NodePath("sprites/leg2:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -605,7 +619,7 @@ tracks/4/keys = {
 "values": [ Vector2( -4, 1 ) ]
 }
 tracks/5/type = "bezier"
-tracks/5/path = NodePath("playerBodySprites/leg1:rotation_degrees")
+tracks/5/path = NodePath("sprites/leg1:rotation_degrees")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -615,7 +629,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.375, 0.75 )
 }
 tracks/6/type = "bezier"
-tracks/6/path = NodePath("playerBodySprites/leg2:rotation_degrees")
+tracks/6/path = NodePath("sprites/leg2:rotation_degrees")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -628,7 +642,7 @@ tracks/6/keys = {
 [sub_resource type="Animation" id=8]
 length = 0.1
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("playerBodySprites/body:position:y")
+tracks/0/path = NodePath("sprites/body:position:y")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -638,7 +652,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("playerBodySprites/arm1:position:y")
+tracks/1/path = NodePath("sprites/arm1Rig/arm1:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -648,7 +662,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0.1 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("playerBodySprites/arm2:position:y")
+tracks/2/path = NodePath("sprites/arm2:position:y")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -658,7 +672,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1 )
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("playerBodySprites/leg1:position")
+tracks/3/path = NodePath("sprites/leg1:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -670,7 +684,7 @@ tracks/3/keys = {
 "values": [ Vector2( 4, 1 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("playerBodySprites/leg2:position")
+tracks/4/path = NodePath("sprites/leg2:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -682,7 +696,7 @@ tracks/4/keys = {
 "values": [ Vector2( -4, 1 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("playerBodySprites/leg1:rotation_degrees")
+tracks/5/path = NodePath("sprites/leg1:rotation_degrees")
 tracks/5/interp = 2
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -694,7 +708,7 @@ tracks/5/keys = {
 "values": [ 0.0 ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("playerBodySprites/leg2:rotation_degrees")
+tracks/6/path = NodePath("sprites/leg2:rotation_degrees")
 tracks/6/interp = 2
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -748,7 +762,7 @@ tracks/9/keys = {
 length = 1.2
 loop = true
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("playerBodySprites/body:position:y")
+tracks/0/path = NodePath("sprites/body:position:y")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -758,7 +772,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6, 0.899912, 1.2 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("playerBodySprites/arm1:position:y")
+tracks/1/path = NodePath("sprites/arm1Rig/arm1:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -768,7 +782,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("playerBodySprites/arm2:position:y")
+tracks/2/path = NodePath("sprites/arm2:position:y")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -778,7 +792,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 )
 }
 tracks/3/type = "bezier"
-tracks/3/path = NodePath("playerBodySprites/leg2:position:y")
+tracks/3/path = NodePath("sprites/leg2:position:y")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -788,7 +802,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 )
 }
 tracks/4/type = "bezier"
-tracks/4/path = NodePath("playerBodySprites/leg1:position:y")
+tracks/4/path = NodePath("sprites/leg1:position:y")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -798,7 +812,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 )
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("playerBodySprites/leg1:rotation_degrees")
+tracks/5/path = NodePath("sprites/leg1:rotation_degrees")
 tracks/5/interp = 2
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -810,7 +824,7 @@ tracks/5/keys = {
 "values": [ 0.0 ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("playerBodySprites/leg2:rotation_degrees")
+tracks/6/path = NodePath("sprites/leg2:rotation_degrees")
 tracks/6/interp = 2
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -834,33 +848,16 @@ current = true
 zoom = Vector2( 0.5, 0.5 )
 process_mode = 0
 
-[node name="playerBodySprites" type="Node2D" parent="."]
+[node name="sprites" type="Node2D" parent="."]
 
-[node name="body" type="Sprite" parent="playerBodySprites"]
+[node name="body" type="Sprite" parent="sprites"]
 z_index = 1
 texture = ExtResource( 3 )
 offset = Vector2( 0, -7 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
 
-[node name="arm1" type="Sprite" parent="playerBodySprites"]
-position = Vector2( -7, -2 )
-rotation = 1.42768
-z_index = -4
-texture = ExtResource( 3 )
-offset = Vector2( 0, 6 )
-region_enabled = true
-region_rect = Rect2( 16, 0, 4, 16 )
-
-[node name="weaponSlot" type="Node2D" parent="playerBodySprites/arm1"]
-position = Vector2( 0, 14 )
-rotation = -1.5708
-script = ExtResource( 4 )
-
-[node name="pistol" parent="playerBodySprites/arm1/weaponSlot" instance=ExtResource( 5 )]
-scale = Vector2( -1, 1 )
-
-[node name="arm2" type="Sprite" parent="playerBodySprites"]
+[node name="arm2" type="Sprite" parent="sprites"]
 position = Vector2( 7, -2 )
 z_index = 2
 texture = ExtResource( 3 )
@@ -868,7 +865,7 @@ offset = Vector2( 0, 6 )
 region_enabled = true
 region_rect = Rect2( 16, 0, 4, 16 )
 
-[node name="leg1" type="Sprite" parent="playerBodySprites"]
+[node name="leg1" type="Sprite" parent="sprites"]
 position = Vector2( 4, 1 )
 rotation = -0.0187308
 z_index = -1
@@ -877,7 +874,7 @@ offset = Vector2( 0, 6 )
 region_enabled = true
 region_rect = Rect2( 16, 0, 4, 16 )
 
-[node name="leg2" type="Sprite" parent="playerBodySprites"]
+[node name="leg2" type="Sprite" parent="sprites"]
 position = Vector2( -4, 1 )
 rotation = 0.0190077
 z_index = -2
@@ -885,6 +882,28 @@ texture = ExtResource( 3 )
 offset = Vector2( 0, 6 )
 region_enabled = true
 region_rect = Rect2( 16, 0, 4, 16 )
+
+[node name="arm1Rig" type="Node2D" parent="sprites"]
+
+[node name="arm1" type="Sprite" parent="sprites/arm1Rig"]
+position = Vector2( -7, -2 )
+rotation = 1.5708
+z_index = -4
+texture = ExtResource( 3 )
+offset = Vector2( 0, 6 )
+region_enabled = true
+region_rect = Rect2( 16, 0, 4, 16 )
+
+[node name="weaponSlot" type="Node2D" parent="sprites/arm1Rig/arm1"]
+position = Vector2( 0, 14 )
+rotation = -1.5708
+script = ExtResource( 4 )
+
+[node name="pistol" parent="sprites/arm1Rig/arm1/weaponSlot" instance=ExtResource( 5 )]
+scale = Vector2( -1, 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="sprites/arm1Rig"]
+anims/Shoot = SubResource( 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"

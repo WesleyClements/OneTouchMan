@@ -3,9 +3,7 @@ class_name Player
 
 export(float) var frictionCoef:= 30;
 
-export(float) var inputTimeEpsilon:= 0.1;
-
-export(float) var aimSpeed:= 180 / 1.0;
+export(float) var aimSpeed:= 180 / 0.75;
 export(float) var aimMin:= 0.0;
 export(float) var aimMax:= 180.0;
 
@@ -79,9 +77,9 @@ var facing: int setget setFacing;
 func setFacing(newFacing) -> void:
 	facing = newFacing;
 	if facing == -1:
-		$playerBodySprites.scale.x = 1;
+		$sprites.scale.x = 1;
 	else:
-		$playerBodySprites.scale.x = -1;
+		$sprites.scale.x = -1;
 
 var timeOffGround;
 
@@ -148,38 +146,41 @@ func processShoot(delta, shoot) -> void:
 	if not shoot:
 		return;
 	
-	var weapon = $playerBodySprites/arm1/weaponSlot/pistol;
+	var weapon = $sprites/arm1Rig/arm1/weaponSlot/pistol;
 	if not weapon.canShoot():
 		return;
 
 	var bullet = weapon.createBullet();
-	bullet.dir = ($playerBodySprites/arm1/weaponSlot.get_relative_transform_to_parent(self).origin -
-					$playerBodySprites/arm1.get_relative_transform_to_parent(self).origin).normalized();
-	bullet.position = to_global($playerBodySprites/arm1/weaponSlot/pistol/firePoint.get_relative_transform_to_parent(self).origin);
-	bullet.rotation = bullet.dir.angle();
-	bullet.scale.x = $playerBodySprites.scale.x;
+	bullet.dir = ($sprites/arm1Rig/arm1/weaponSlot.get_relative_transform_to_parent(self).origin -
+					$sprites/arm1Rig/arm1.get_relative_transform_to_parent(self).origin).normalized();
+	
+	bullet.position = to_global($sprites/arm1Rig/arm1/weaponSlot/pistol/firePoint.get_relative_transform_to_parent(self).origin);
+	bullet.rotation = (bullet.dir * $sprites.scale.x).angle();
+	bullet.scale.x = $sprites.scale.x;
 	
 	get_parent().add_child(bullet);
 	weapon.resetFireTimer();
+	$sprites/arm1Rig/AnimationPlayer.play("Shoot");
+	$sprites/arm1Rig/arm1/weaponSlot/pistol/AnimationPlayer.play("Shoot");
 
 func processAim(delta, aimDir) -> void:
 	match aimDir:
 		0:
 			return;
 		-1:
-			if $playerBodySprites/arm1.rotation_degrees > aimMin:
-				$playerBodySprites/arm1.rotation_degrees -= aimSpeed * delta;
+			if $sprites/arm1Rig/arm1.rotation_degrees > aimMin:
+				$sprites/arm1Rig/arm1.rotation_degrees -= aimSpeed * delta;
 			else:
 				return;
-			if $playerBodySprites/arm1.rotation_degrees < aimMin:
-				$playerBodySprites/arm1.rotation_degrees = aimMin;
+			if $sprites/arm1Rig/arm1.rotation_degrees < aimMin:
+				$sprites/arm1Rig/arm1.rotation_degrees = aimMin;
 		1:
-			if $playerBodySprites/arm1.rotation_degrees < aimMax:
-				$playerBodySprites/arm1.rotation_degrees += aimSpeed * delta;
+			if $sprites/arm1Rig/arm1.rotation_degrees < aimMax:
+				$sprites/arm1Rig/arm1.rotation_degrees += aimSpeed * delta;
 			else:
 				return;
-			if $playerBodySprites/arm1.rotation_degrees > aimMax:
-				$playerBodySprites/arm1.rotation_degrees = aimMax;
+			if $sprites/arm1Rig/arm1.rotation_degrees > aimMax:
+				$sprites/arm1Rig/arm1.rotation_degrees = aimMax;
 
 func processCrouch(delta, crouch) -> void:
 	if !is_on_floor():

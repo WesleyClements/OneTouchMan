@@ -11,6 +11,7 @@ script = ExtResource( 1 )
 shape = ExtResource( 2 )
 
 [node name="pistol" type="Sprite" parent="."]
-position = Vector2( -1.85859, 2.25123 )
 texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 5, 2 )
 [connection signal="body_entered" from="." to="." method="_on_pistolBullet_body_entered"]

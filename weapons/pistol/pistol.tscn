@@ -4,8 +4,12 @@
 [ext_resource path="res://weapons/pistol/pistol.gd" type="Script" id=2]
 
 [node name="pistol" type="Sprite"]
+position = Vector2( 0, -2 )
 texture = ExtResource( 1 )
 offset = Vector2( 2, 1 )
 region_enabled = true
 region_rect = Rect2( 0, 2, 11, 7 )
 script = ExtResource( 2 )
+
+[node name="firePoint" type="Node2D" parent="."]
+position = Vector2( 10, -0.5 )

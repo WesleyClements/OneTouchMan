@@ -7,6 +7,8 @@ var serverIP = '127.0.0.1'
 var serverPort = 0
 var playerCount = 4
 
+enum TaskStatus { FRESH, RUNNING, FAILED, SUCCEEDED, CANCELLED }
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

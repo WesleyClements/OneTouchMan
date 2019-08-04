@@ -9,15 +9,35 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "BehaviorTree",
+"language": "GDScript",
+"path": "res://btree/BehaviorTree.gd"
+}, {
+"base": "",
+"class": "BranchTask",
+"language": "GDScript",
+"path": "res://btree/branch/BranchTask.gd"
+}, {
 "base": "Area2D",
 "class": "Bullet",
 "language": "GDScript",
 "path": "res://weapons/Bullet.gd"
 }, {
 "base": "KinematicBody2D",
+"class": "Entity",
+"language": "GDScript",
+"path": "res://entity/entity.gd"
+}, {
+"base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
 "path": "res://player/playerController.gd"
+}, {
+"base": "BranchTask",
+"class": "Selector",
+"language": "GDScript",
+"path": "res://btree/branch/Selector.gd"
 }, {
 "base": "Sprite",
 "class": "Weapon",
@@ -25,8 +45,12 @@ _global_script_classes=[ {
 "path": "res://weapons/Weapon.gd"
 } ]
 _global_script_class_icons={
+"BehaviorTree": "",
+"BranchTask": "",
 "Bullet": "",
+"Entity": "",
 "Player": "",
+"Selector": "",
 "Weapon": ""
 }
 

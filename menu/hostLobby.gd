@@ -21,6 +21,7 @@ func _ready():
 
 func _onPeerConnected(username):
 	text = text + '\n' + str(username) + 'connected'
+	globals.players[numConnectedPlayers] = username
 	numConnectedPlayers+= 1
 
 func _onPeerDisconnected(username):
@@ -28,5 +29,6 @@ func _onPeerDisconnected(username):
 	numConnectedPlayers-= 1
 
 func _onStartGamePressed():
-	#launch game
-	pass
+	if numConnectedPlayers == globals.playerCount:
+		#launch game
+		pass

@@ -93,7 +93,7 @@ _global_script_class_icons={
 [application]
 
 config/name="OneTouchMan"
-run/main_scene="res://mainMenu.tscn"
+run/main_scene="res://menu/mainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]

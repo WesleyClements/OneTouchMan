@@ -1,33 +1,34 @@
-extends "../Task.gd"
+extends Task
 
 class_name BranchTask
 
 var children: Array
-var runningChild
+var runningChild: Task
 var childIndex: int
 
-func _init(children: Array):
-	self.children = children
+func _init(_children: Array):
+	children = _children
 
-func setStatus(var status: int):
-	.setStatus(status)
-	match (status):
-		globals.TaskStatus.FAILED:
-			runningChild = null
-		globals.TaskStatus.SUCCEEDED:
-			runningChild = null
-
-func start():
+func childSucceeded(delta: float) -> void:
 	runningChild = null
 
-func run():
+func childFailed(delta: float) -> void:
+	runningChild = null
+
+func childRunning(delta: float) -> void:
+	running(delta)
+
+func start() -> void:
+	runningChild = null
+
+func run(delta: float) -> void:
 	if (runningChild != null):
-		runningChild.run()
+		runningChild.run(delta)
 	else:
 		runningChild = children[childIndex]
 		runningChild.start()
 		
-		if (!runningChild.checkGuard()):
-			status = globals.TaskStatus.FAILED
+		if (runningChild.checkGuard(delta)):
+			runningChild.run(delta)
 		else:
-			status = runningChild.run()
+			runningChild.failed(delta)

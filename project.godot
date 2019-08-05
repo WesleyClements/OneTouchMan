@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://btree/BehaviorTree.gd"
 }, {
-"base": "",
+"base": "Task",
 "class": "BranchTask",
 "language": "GDScript",
 "path": "res://btree/branch/BranchTask.gd"
@@ -30,6 +30,21 @@ _global_script_classes=[ {
 "path": "res://entity/entity.gd"
 }, {
 "base": "KinematicBody2D",
+"class": "Eye",
+"language": "GDScript",
+"path": "res://eye/Eye.gd"
+}, {
+"base": "Task",
+"class": "LeafTask",
+"language": "GDScript",
+"path": "res://btree/leaf/LeafTask.gd"
+}, {
+"base": "WaitTask",
+"class": "PatrolTask",
+"language": "GDScript",
+"path": "res://entity/ai/PatrolTask.gd"
+}, {
+"base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
 "path": "res://player/playerController.gd"
@@ -39,10 +54,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://btree/branch/Selector.gd"
 }, {
+"base": "BranchTask",
+"class": "Sequence",
+"language": "GDScript",
+"path": "res://btree/branch/Sequence.gd"
+}, {
 "base": "Reference",
 "class": "Task",
 "language": "GDScript",
 "path": "res://btree/Task.gd"
+}, {
+"base": "LeafTask",
+"class": "WaitTask",
+"language": "GDScript",
+"path": "res://btree/leaf/WaitTask.gd"
 }, {
 "base": "Sprite",
 "class": "Weapon",
@@ -54,9 +79,14 @@ _global_script_class_icons={
 "BranchTask": "",
 "Bullet": "",
 "Entity": "",
+"Eye": "",
+"LeafTask": "",
+"PatrolTask": "",
 "Player": "",
 "Selector": "",
+"Sequence": "",
 "Task": "",
+"WaitTask": "",
 "Weapon": ""
 }
 

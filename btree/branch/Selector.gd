@@ -2,11 +2,18 @@ extends BranchTask
 
 class_name Selector
 
-func _ready():
-	children.append(1)
+func start() -> void:
+	.start()
+	childIndex = 0
 
-func setStatus(var status: int):
-	.setStatus(status)
-	match (status):
-		globals.TaskStatus.FAILED:
-			.raun()
+func childSucceeded(delta: float) -> void:
+	.childSucceeded(delta)
+	succeeded(delta)
+
+func childFailed(delta: float) -> void:
+	.childFailed(delta)
+	childIndex += 1
+	if (childIndex < children.size()):
+		run(delta)
+	else:
+		failed(delta)

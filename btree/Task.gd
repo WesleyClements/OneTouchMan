@@ -1,40 +1,72 @@
 class_name Task
 
-var status: int = Globals.TaskStatus.FRESH setget setStatus, getStatus
+var status: int = Globals.TaskStatus.FRESH
 
-var parent setget setParent, getParent
+var parent: Task setget setParent, getParent
 
-var guard setget setGuard, getGuard
+var guard: Task setget setGuard, getGuard
 
-func _init():
-	pass
-
-func setStatus(var _status: int):
-	status = _status
-
-func getStatus():
-	return status
-
-func setParent(var _parent):
+func setParent(_parent: Task) -> void:
 	parent = _parent
 
-func getParent():
+func getParent() -> Task:
 	return parent
 
-func setGuard(var _guard):
+func setGuard(_guard: Task) -> void:
 	guard = _guard
 
-func getGuard():
+func getGuard() -> Task:
 	return guard
 
-func checkGuard():
+func checkGuard(delta: float) -> bool:
+	if (guard == null):
+		return true
+	
+	if (!guard.checkGuard(delta)):
+		return false
+	
+	guard.start()
+	guard.run(delta)
+	match (guard.status):
+		Globals.TaskStatus.SUCCEEDED:
+			return true
+		Globals.TaskStatus.FAILED:
+			return false
+		_:
+			printerr("Illegal State: Guard status must only be SUCCEEDED or FAILED")
+			return false
+
+func succeeded(delta: float) -> void:
+	status = Globals.TaskStatus.SUCCEEDED
+	end()
+	if (parent != null):
+		parent.childSucceeded(delta)
+
+func failed(delta: float) -> void:
+	status = Globals.TaskStatus.FAILED
+	end()
+	if (parent != null):
+		parent.childFailed(delta)
+
+func running(delta: float) -> void:
+	status = Globals.TaskStatus.RUNNING
+	if (parent != null):
+		parent.childRunning(delta)
+
+func childSucceeded(delta: float) -> void:
 	pass
 
-func start():
+func childFailed(delta: float) -> void:
 	pass
 
-func run():
+func childRunning(delta: float) -> void:
 	pass
 
-func end():
+func start() -> void:
+	pass
+
+func run(delta: float) -> void:
+	pass
+
+func end() -> void:
 	pass

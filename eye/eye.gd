@@ -1,17 +1,15 @@
 extends KinematicBody2D
 
-var direction := 1
+class_name Eye
 
-func _ready():
-	pass
+var brain: BehaviorTree
+
+func _init():
+	var patrolTask = PatrolTask.new(self)
 	
-func _physics_process(delta):
-	if $collisionRight.is_colliding():
-		direction = -1
-		
-	if $collisionLeft.is_colliding():
-		direction = 1
+	var rootTask = Sequence.new([PatrolTask.new(self), WaitTask.new(self, 1)])
 	
-	move_and_slide(Vector2(60 * direction, 0))
+	brain = BehaviorTree.new(rootTask)
 	
-	$sprite.scale.x = direction
+func _process(delta):
+	brain._process(delta)

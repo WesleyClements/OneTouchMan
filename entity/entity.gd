@@ -2,19 +2,20 @@ extends KinematicBody2D
 
 class_name Entity
 
-var brain: BehaviorTree
+var brain: BehaviorTree setget setBrain, getBrain
 
 var maxHealth: int
 var health: int
 
-func _init(var brain: BehaviorTree, var maxHealth: int):
-	self.brain = brain
-	self.maxHealth = maxHealth
-	self.health = maxHealth
+func _init(_maxHealth: int):
+	maxHealth = _maxHealth
+	health = _maxHealth
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func setBrain(_brain: BehaviorTree):
+	brain = _brain
+
+func getBrain():
+	return brain
 
 func _process(delta):
-	pass
+	brain._process(delta)

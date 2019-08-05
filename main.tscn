@@ -2,7 +2,8 @@
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tiles/autotileset.tres" type="TileSet" id=2]
-[ext_resource path="res://eye/eye.tscn" type="PackedScene" id=3]
+[ext_resource path="res://entity/boss/eye/eye.tscn" type="PackedScene" id=3]
+
 
 [node name="Node2D" type="Node2D"]
 

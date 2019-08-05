@@ -2,13 +2,10 @@ extends LeafTask
 
 class_name WaitTask
 
-var eye
-
 var waitTimeSeconds: float
 var secondsRemaining: float
 
-func _init(_eye, _waitTimeSeconds: float):
-	eye = _eye
+func _init(_waitTimeSeconds: float):
 	waitTimeSeconds = _waitTimeSeconds
 
 func start():

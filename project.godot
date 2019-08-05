@@ -27,12 +27,12 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Entity",
 "language": "GDScript",
-"path": "res://entity/entity.gd"
+"path": "res://entity/Entity.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "Entity",
 "class": "Eye",
 "language": "GDScript",
-"path": "res://eye/Eye.gd"
+"path": "res://entity/boss/eye/Eye.gd"
 }, {
 "base": "Task",
 "class": "LeafTask",
@@ -58,6 +58,11 @@ _global_script_classes=[ {
 "class": "Sequence",
 "language": "GDScript",
 "path": "res://btree/branch/Sequence.gd"
+}, {
+"base": "LeafTask",
+"class": "ShootTask",
+"language": "GDScript",
+"path": "res://entity/ai/ShootTask.gd"
 }, {
 "base": "Reference",
 "class": "Task",
@@ -85,6 +90,7 @@ _global_script_class_icons={
 "Player": "",
 "Selector": "",
 "Sequence": "",
+"ShootTask": "",
 "Task": "",
 "WaitTask": "",
 "Weapon": ""
